@@ -88,7 +88,7 @@ const App = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <BusinessIcon color="primary" sx={{ fontSize: 32 }} />
-          <Typography variant="h4" fontWeight={700}>
+          <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {t('title')}
           </Typography>
         </Box>
@@ -117,13 +117,15 @@ const App = () => {
           onKeyDown={e => e.key === 'Enter' && handleSearch()}
           error={!!validationError}
           helperText={validationError}
-          inputProps={{ maxLength: 100 }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon color="action" />
-              </InputAdornment>
-            ),
+          slotProps={{
+            htmlInput: { maxLength: 100 },
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="action" />
+                </InputAdornment>
+              ),
+            },
           }}
         />
         <Button
@@ -171,7 +173,7 @@ const App = () => {
                     {results.map(company => (
                       <TableRow key={company.businessId.value} hover sx={{ '&:last-child td': { border: 0 } }}>
                         <TableCell>
-                          <Typography variant="body2" fontWeight={600}>
+                          <Typography variant="body2" sx={{ fontWeight: 600 }}>
                             {getActiveName(company)}
                           </Typography>
                         </TableCell>
