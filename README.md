@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# PRH Yrityshaku / PRH Company Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live demo:** https://delightful-ground-042faae03.7.azurestaticapps.net/
 
-Currently, two official plugins are available:
+Yritystietojen hakusovellus PRH:n (Patentti- ja rekisterihallitus) avoimesta YTJ-rajapinnasta.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Hae yrityksiä nimellä tai y-tunnuksella. Tulokset näytetään taulukkomuodossa keskeisine tietoineen.
 
-## React Compiler
+## Ominaisuudet
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Haku yrityksen nimellä tai y-tunnuksella
+- Tulosten sivutus (100 tulosta/sivu)
+- Näytettävät tiedot: nimi, y-tunnus, yhtiömuoto, toimiala, osoite, verkkosivut
+- Syötteiden validointi ja sanitointi
+- Kielivalinta: suomi / englanti (i18n)
+- Responsiivinen Material UI -käyttöliittymä
 
-## Expanding the ESLint configuration
+## Teknologiat
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite 5](https://vitejs.dev/)
+- [Material UI 9](https://mui.com/)
+- [i18next](https://www.i18next.com/)
+- [PRH Avoin data YTJ-rajapinta](https://avoindata.prh.fi/fi/ytj/swagger-ui)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Asennus ja käynnistys
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Node.js 20+ vaaditaan.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Sovellus käynnistyy osoitteessa http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tuotantoversio
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+Tuotantokäännetty sovellus löytyy `dist/`-kansiosta.
+
+## Käyttö
+
+1. Kirjoita yrityksen nimi tai y-tunnus (muoto `1234567-8`) hakukenttään
+2. Paina **Hae** tai Enter
+3. Selaa tuloksia sivutuspalkin avulla
+4. Vaihda käyttöliittymän kieli FI/EN-painikkeella oikeasta yläkulmasta
+
+## Rajapinta
+
+Sovellus käyttää PRH:n avointa YTJ-rajapintaa suoraan selaimesta ilman välipalvelinta.
+
+- Rajapinnan dokumentaatio: https://avoindata.prh.fi/fi/ytj/swagger-ui
+- Ei API-avainta tai autentikointia tarvita
