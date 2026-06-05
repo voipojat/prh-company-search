@@ -11,8 +11,7 @@
     "companyForm": "Company form",
     "businessLine": "Industry",
     "address": "Address",
-    "website": "Website",
-    "registrationDate": "Registered"
+    "website": "Website"
   },
   "errors": {
     "fetchFailed": "Search failed: {{status}}",

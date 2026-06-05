@@ -11,8 +11,7 @@
     "companyForm": "Yhtiömuoto",
     "businessLine": "Toimiala",
     "address": "Osoite",
-    "website": "Verkkosivut",
-    "registrationDate": "Rekisteröity"
+    "website": "Verkkosivut"
   },
   "errors": {
     "fetchFailed": "Haku epäonnistui: {{status}}",

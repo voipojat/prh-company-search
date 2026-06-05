@@ -165,7 +165,6 @@ const App = () => {
                       <TableCell>{t('columns.businessLine')}</TableCell>
                       <TableCell>{t('columns.address')}</TableCell>
                       <TableCell>{t('columns.website')}</TableCell>
-                      <TableCell>{t('columns.registrationDate')}</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -197,7 +196,6 @@ const App = () => {
                             </Link>
                           ) : '—'}
                         </TableCell>
-                        <TableCell>{company.registrationDate}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
