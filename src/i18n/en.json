@@ -1,6 +1,7 @@
 {
   "title": "PRH Company Search",
-  "subtitle": "Search for companies by name or business ID (PRH open data)",
+  "subtitle": "Search for companies by name or business ID",
+  "subtitleTooltip": "When searching by name, the search covers current and previous trade names, parallel trade names and auxiliary trade names.",
   "placeholder": "Company name or business ID (e.g. 1234567-8)",
   "search": "Search",
   "results": "{{count}} results",

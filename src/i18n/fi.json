@@ -1,6 +1,7 @@
 {
   "title": "PRH Yrityshaku",
-  "subtitle": "Hae yrityksiä nimellä tai y-tunnuksella (PRH avoin data)",
+  "subtitle": "Hae yrityksiä nimellä tai y-tunnuksella",
+  "subtitleTooltip": "Nimellä haettaessa haku kohdistuu nykyiseen ja edelliseen toiminimeen, rinnakkaistoiminimeen sekä aputoiminimeen.",
   "placeholder": "Yrityksen nimi tai y-tunnus (esim. 1234567-8)",
   "search": "Hae",
   "results": "{{count}} tulosta",

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -21,67 +20,30 @@ import {
   Pagination,
   ToggleButton,
   ToggleButtonGroup,
+  Tooltip,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import BusinessIcon from '@mui/icons-material/Business'
-import { searchCompanies, PAGE_SIZE } from './api/prhApi'
-import { sanitize, validate } from './validation/validation'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import { PAGE_SIZE } from './api/prhApi'
 import { getActiveName, getCompanyForm, getBusinessLine, getAddress, getWebsiteUrl } from './utils/companyUtils'
-import type { Company } from './types'
+import { useCompanySearch } from './hooks/useCompanySearch'
 
 const App = () => {
   const { t, i18n } = useTranslation()
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState<Company[]>([])
-  const [total, setTotal] = useState<number | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [validationError, setValidationError] = useState<string | null>(null)
-  const [searched, setSearched] = useState(false)
-  const [page, setPage] = useState(1)
-  const [lastQuery, setLastQuery] = useState('')
-
-  const fetchPage = async (q: string, p: number, updateTotal = false) => {
-    setLoading(true)
-    setError(null)
-    try {
-      const data = await searchCompanies(q, p)
-      setResults(data.companies)
-      if (updateTotal) setTotal(data.totalResults)
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : ''
-      setError(msg ? t('errors.fetchFailed', { status: msg }) : t('errors.unknown'))
-      setResults([])
-      if (updateTotal) setTotal(null)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleSearch = () => {
-    const cleaned = sanitize(query)
-    const err = validate(cleaned)
-    if (err) {
-      setValidationError(t(`errors.${err}`))
-      return
-    }
-    setValidationError(null)
-    setSearched(true)
-    setPage(1)
-    setLastQuery(cleaned)
-    fetchPage(cleaned, 1, true)
-  }
-
-  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value)
-    fetchPage(lastQuery, value)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value.slice(0, 100))
-    setValidationError(null)
-  }
+  const {
+    query,
+    results,
+    total,
+    loading,
+    error,
+    validationError,
+    searched,
+    page,
+    handleSearch,
+    handlePageChange,
+    handleQueryChange,
+  } = useCompanySearch()
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -103,9 +65,14 @@ const App = () => {
         </ToggleButtonGroup>
       </Box>
 
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        {t('subtitle')}
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 3 }}>
+        <Typography variant="body2" color="text.secondary">
+          {t('subtitle')}
+        </Typography>
+        <Tooltip title={t('subtitleTooltip')} arrow>
+          <InfoOutlinedIcon sx={{ fontSize: 16, color: 'text.secondary', cursor: 'help' }} />
+        </Tooltip>
+      </Box>
 
       <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
         <TextField
@@ -181,8 +148,8 @@ const App = () => {
                           <Chip label={company.businessId.value} size="small" variant="outlined" />
                         </TableCell>
                         <TableCell>{getCompanyForm(company)}</TableCell>
-                        <TableCell sx={{ maxWidth: 180 }}>
-                          <Typography variant="body2" noWrap title={getBusinessLine(company)}>
+                        <TableCell>
+                          <Typography variant="body2">
                             {getBusinessLine(company)}
                           </Typography>
                         </TableCell>
@@ -209,7 +176,10 @@ const App = () => {
                   <Pagination
                     count={Math.ceil(total / PAGE_SIZE)}
                     page={page}
-                    onChange={handlePageChange}
+                    onChange={(_, value) => {
+                      handlePageChange(value)
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
                     color="primary"
                   />
                 </Box>
