@@ -62,6 +62,7 @@ const App = () => {
         >
           <ToggleButton value="fi">FI</ToggleButton>
           <ToggleButton value="en">EN</ToggleButton>
+          <ToggleButton value="sv">SV</ToggleButton>
         </ToggleButtonGroup>
       </Box>
 
@@ -147,13 +148,13 @@ const App = () => {
                         <TableCell>
                           <Chip label={company.businessId.value} size="small" variant="outlined" />
                         </TableCell>
-                        <TableCell>{getCompanyForm(company)}</TableCell>
+                        <TableCell>{getCompanyForm(company, i18n.language)}</TableCell>
                         <TableCell>
                           <Typography variant="body2">
-                            {getBusinessLine(company)}
+                            {getBusinessLine(company, i18n.language)}
                           </Typography>
                         </TableCell>
-                        <TableCell>{getAddress(company)}</TableCell>
+                        <TableCell>{getAddress(company, i18n.language)}</TableCell>
                         <TableCell>
                           {company.website ? (
                             <Link

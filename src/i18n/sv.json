@@ -1,0 +1,24 @@
+{
+  "title": "PRH Företagssökning",
+  "subtitle": "Sök företag med namn eller FO-nummer",
+  "subtitleTooltip": "Vid sökning med namn söker man i nuvarande och föregående firma, parallellnamn och bifirma.",
+  "placeholder": "Företagsnamn eller FO-nummer (t.ex. 1234567-8)",
+  "search": "Sök",
+  "results": "{{count}} resultat",
+  "noResults": "Inga sökresultat.",
+  "columns": {
+    "name": "Namn",
+    "businessId": "FO-nummer",
+    "companyForm": "Bolagsform",
+    "businessLine": "Bransch",
+    "address": "Adress",
+    "website": "Webbplats"
+  },
+  "errors": {
+    "fetchFailed": "Sökningen misslyckades: {{status}}",
+    "unknown": "Okänt fel",
+    "tooShort": "Sökordet är för kort (minst 2 tecken).",
+    "tooLong": "Sökordet är för långt (max 100 tecken).",
+    "invalidBusinessId": "Kontrollera FO-numrets format (t.ex. 1234567-8)."
+  }
+}
